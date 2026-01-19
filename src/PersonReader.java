@@ -80,6 +80,12 @@ public class PersonReader {
             return;
         }
 
+        // Print header with column titles
+        String header = String.format("\n%-10s %-20s %-20s %-8s %s",
+                "ID#", "Firstname", "Lastname", "Title", "YOB");
+        System.out.println(header);
+        System.out.println("=".repeat(80));
+
         // Process each line and split into fields
         String[] fields;
         for(String l : lines) {
@@ -91,7 +97,11 @@ public class PersonReader {
                 lastName  = fields[2].trim();
                 title     = fields[3].trim();
                 yob       = Integer.parseInt(fields[4].trim());
-                System.out.printf("\n%-8s%-25s%-25s%-6s%6d", id, firstName, lastName, title, yob);
+
+                // Use String.format to create neatly formatted columnar display
+                String formattedRecord = String.format("%-10s %-20s %-20s %-8s %d",
+                        id, firstName, lastName, title, yob);
+                System.out.println(formattedRecord);
             } else {
                 System.out.println("Found a record that may be corrupt: ");
                 System.out.println(l);
